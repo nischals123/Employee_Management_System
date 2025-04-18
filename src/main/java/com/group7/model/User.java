@@ -1,33 +1,30 @@
 package com.group7.model;
 
 public class User {
-//    private  int id;
+
     private String name;
     private String email;
     private String password;
     private String phone;
     private String picturePath;
-    private int role = 0;
+    private Role role;
     private boolean isActive;
-    private int departmentId = 0;
-    // Default constructor
+    private int departmentId;
+
+    // No-argument constructor
     public User() {
     }
 
-
-    // Main constructor used during registration
+    // All-arguments constructor (optional, can customize this)
     public User(String name, String email, String password, String phone, String picturePath) {
-//        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.phone = phone;
         this.picturePath = picturePath;
-//        this.departmentId = departmentId;
     }
 
-    // Getters and Setters
-
+    // Getters and setters
 
     public String getName() {
         return name;
@@ -69,11 +66,11 @@ public class User {
         this.picturePath = picturePath;
     }
 
-    public int getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

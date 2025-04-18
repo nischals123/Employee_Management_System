@@ -1,5 +1,6 @@
 package com.group7.controller;
 
+import com.group7.model.Role;
 import com.group7.model.User;
 import com.group7.model.UserDAO;
 import jakarta.servlet.ServletException;
@@ -14,13 +15,13 @@ import java.io.IOException;
 @MultipartConfig
 public class RegisterServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("🚀 RegisterServlet hit!");
+        System.out.println("RegisterServlet hit!");
 
         try {
             String name = request.getParameter("name").trim();
@@ -28,12 +29,14 @@ public class RegisterServlet extends HttpServlet {
             String password = request.getParameter("password").trim();
             String phone = request.getParameter("phone").trim();
 
+            // Check if user already exists
             if (UserDAO.getUserByEmail(email) != null) {
                 request.setAttribute("error", "Email already exists. Please use another email.");
                 request.getRequestDispatcher("register.jsp").forward(request, response);
                 return;
             }
 
+            // Handle uploaded photo
             Part photoPart = request.getPart("photo");
             String fileName = System.currentTimeMillis() + "_" + photoPart.getSubmittedFileName();
 
@@ -47,17 +50,25 @@ public class RegisterServlet extends HttpServlet {
             File uploadDir = new File(uploadPath);
             if (!uploadDir.exists()) uploadDir.mkdir();
 
-            // Debug logs
             System.out.println("Upload Path: " + uploadPath);
             System.out.println("File Name: " + fileName);
 
             photoPart.write(uploadPath + File.separator + fileName);
             String picturePath = "user_photos/" + fileName;
 
+            // Create User
+            User user = new User();
+            user.setName(name);
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setPhone(phone);
+            user.setPicturePath(picturePath);
 
-            User user = new User(name, email, password, phone, picturePath);
-            user.setRole(0);
-            user.setDepartmentId(0);
+            // Set default role (adjust ID as needed)
+            user.setRole(new Role(0)); 
+
+            // ✅ FIX: Set valid department ID (adjust based on your DB)
+            user.setDepartmentId(1); // Change 1 to any valid ID from `departments` table
 
             boolean registered = UserDAO.registerUser(user);
 

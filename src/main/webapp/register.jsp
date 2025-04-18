@@ -30,7 +30,7 @@
             <% } %>
 
             <form action="${pageContext.request.contextPath}/register" method="post" enctype="multipart/form-data">
-                <input type="text" name="name" placeholder="Full Name" required>
+        	    <input type="text" name="name" placeholder="Full Name" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="text" name="phone" placeholder="Phone Number" required>
