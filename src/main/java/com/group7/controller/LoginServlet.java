@@ -1,6 +1,7 @@
 package com.group7.controller;
 
 import com.group7.model.User;
+
 import com.group7.model.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
@@ -9,14 +10,14 @@ import java.io.IOException;
 
 public class LoginServlet extends HttpServlet {
 
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.sendRedirect("login.jsp");
     }
 
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,12 +32,10 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             session.setMaxInactiveInterval(30 * 60);
 
-            
-            if (user.getRole() == 1) {
-                response.sendRedirect("view/admin/admin-dashboard.jsp");
-            } else {
-                response.sendRedirect("view/user/user-dashboard.jsp");
-            }
+
+            // Redirect all users to the same dashboard for now
+            // We can implement role-specific dashboards later
+            response.sendRedirect("dashboard.jsp");
 
         } else {
             request.setAttribute("error", "Invalid credentials or user is inactive.");
