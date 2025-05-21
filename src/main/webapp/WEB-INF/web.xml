@@ -7,28 +7,13 @@
 
     <display-name>Employee_Management_System</display-name>
 
+    <!-- ✅ Welcome Page -->
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>view/index.jsp</welcome-file>
     </welcome-file-list>
 
-    <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.group7.controller.LoginServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
 
-    <servlet>
-        <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.group7.controller.RegisterServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-
+    <!-- ✅ Optional: DB Init Servlet -->
     <servlet>
         <servlet-name>DatabaseInitServlet</servlet-name>
         <servlet-class>com.group7.controller.DatabaseInitServlet</servlet-class>
@@ -37,6 +22,5 @@
         <servlet-name>DatabaseInitServlet</servlet-name>
         <url-pattern>/init-db</url-pattern>
     </servlet-mapping>
-
 
 </web-app>
